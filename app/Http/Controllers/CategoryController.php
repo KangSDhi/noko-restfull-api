@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function listCategory()
     {
-        $query = DB::select("select category_name from category");
+        $query = DB::select("select * from category");
         $code = 200;
         $status = "OK";
         $message = "Data berhasil diload";
@@ -53,7 +53,7 @@ class CategoryController extends Controller
             $message = "Validasi Error!";
             return response()->json(Response::errorResponseWithData($validator->errors(), $code, $status, $message), $code);
         }else{
-            
+
             DB::table('category')->insert([
                 "category_name" => $categoryName,
                 "image" => $categoryImage,
@@ -97,7 +97,7 @@ class CategoryController extends Controller
                         ->update([
                             "category_name" => $categoryName,
                             "image" => $categoryImage,
-                            "color" => $categoryColor 
+                            "color" => $categoryColor
                         ]);
                     DB::commit();
                     $success = true;
